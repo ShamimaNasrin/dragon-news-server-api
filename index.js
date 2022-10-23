@@ -41,6 +41,11 @@ app.get('/news/:id', (req, res) => {
     console.log(selectedNews);
 })
 
+//create all news api
+app.get('/news', (req, res) => {
+    res.send(news);
+})
+
 app.listen(port, () => {
     console.log('Dragon News Server running on port', port);
 })
