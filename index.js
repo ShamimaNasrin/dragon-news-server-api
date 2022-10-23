@@ -20,10 +20,16 @@ app.get('/news-categories', (req, res) => {
 
 //creating news api according to category_id
 app.get('/category/:id', (req, res) => {
-    // console.log(req.params);
     const id = req.params.id;
-    const category_news = news.filter(n => n.category_id === id);
-    res.send(category_news);
+
+    //all the news will show for id: 08
+    if (id === '08') {
+        res.send(news);
+    }
+    else {
+        const category_news = news.filter(n => n.category_id === id);
+        res.send(category_news);
+    }
 })
 
 //creating news api according to newsid(for a single news)
