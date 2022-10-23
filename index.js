@@ -6,6 +6,7 @@ const port = process.env.PORT || 5000;
 app.use(cors());
 
 const categories = require('./data/categories.json');
+const news = require('./data/news.json');
 
 //to create app
 app.get('/', (req, res) => {
@@ -15,6 +16,23 @@ app.get('/', (req, res) => {
 //create api for category data
 app.get('/news-categories', (req, res) => {
     res.send(categories)
+})
+
+//creating news api according to category_id
+app.get('/category/:id', (req, res) => {
+    // console.log(req.params);
+    const id = req.params.id;
+    const category_news = news.filter(n => n.category_id === id);
+    res.send(category_news);
+})
+
+//creating news api according to newsid(for a single news)
+app.get('/news/:id', (req, res) => {
+    // console.log(req.params);
+    const id = req.params.id;
+    const selectedNews = news.find(n => n._id === id);
+    res.send(selectedNews);
+    console.log(selectedNews);
 })
 
 app.listen(port, () => {
